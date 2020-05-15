@@ -33,14 +33,18 @@
  
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <debug>true</debug>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+             <plugin> 
+    <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          
+          <configuration>
+
+                <fork>true</fork>
+                <executable>C:\Program Files\Java\jdk1.8.0_91\bin\javac</executable>
+            
+         </configuration>
+       </plugin>
              
             <plugin>
  
@@ -123,4 +127,6 @@
             </plugin>
         </plugins>
     </reporting>
+    
+
 </project>
