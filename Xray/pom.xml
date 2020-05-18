@@ -10,6 +10,7 @@
          <properties>
       <!-- This property will be set by the Maven Dependency plugin -->
       <annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
   <dependencies>
@@ -32,11 +33,7 @@
     <scope>compile</scope>
 </dependency>
     <!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->  
-  </dependencies>
-         <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
+ </dependencies>
   <repositories>
             <repository>
                 <id>xpandit</id>
@@ -56,6 +53,19 @@
     </reporting>
            <build>
         <plugins>
+                 <plugin>
+          <!-- This plugin will set the properties values using dependency information -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.3</version>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>properties</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
              <plugin> 
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
