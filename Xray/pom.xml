@@ -1,59 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xpand.java</groupId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.xpand.java</groupId>
     <artifactId>xpand-test</artifactId>
     <version>1.0-SNAPSHOT</version>
-         
-         <properties>
+  <name>xpand-test</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
       <!-- This property will be set by the Maven Dependency plugin -->
       <annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
+
   <dependencies>
-   <dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker</artifactId>
         <version>1.9.4</version>
     </dependency>
-  
     <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>3.141.59</version>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker-qual</artifactId>
+        <version>1.9.4</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
-<dependency>
-    <groupId>org.testng</groupId>
-    <artifactId>testng</artifactId>
-    <version>7.1.0</version>
-    <scope>compile</scope>
-</dependency>
-    <!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->  
- </dependencies>
-  <repositories>
-            <repository>
-                <id>xpandit</id>
-            <name>xpand-releases</name>
-            <url>http://maven.xpand-it.com/artifactory/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories> 
-  <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </reporting>
-           <build>
-        <plugins>
-                 <plugin>
+    <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>jdk8</artifactId>
+        <version>1.9.4</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>exec-maven-plugin</artifactId>
+	<version>1.2.1</version>
+	<executions>
+	  <execution>
+	    <goals>
+	      <goal>java</goal>
+	    </goals>
+	  </execution>
+	</executions>
+	<configuration>
+	  <mainClass>com.xpand.DemoTest</mainClass>
+	  <arguments>
+	    <argument>argument1</argument>
+	  </arguments>
+	</configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-shade-plugin</artifactId>
+	<version>2.1</version>
+	<executions>
+	  <execution>
+	    <phase>package</phase>
+	    <goals>
+	      <goal>shade</goal>
+	    </goals>
+	    <configuration>
+	      <transformers>
+		<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+		  <mainClass>com.xpand.DemoTest</mainClass>
+		</transformer>
+	      </transformers>
+	    </configuration>
+	  </execution>
+	</executions>
+      </plugin>
+      <plugin>
           <!-- This plugin will set the properties values using dependency information -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
@@ -66,34 +88,22 @@
               </execution>
           </executions>
       </plugin>
-             <plugin> 
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-          
-             <configuration>
-                 <compilerVersion>1.8</compilerVersion>
-                   <source>1.8</source>
-                    <target>1.8</target>
-                      <fork>true</fork>
-            
-         </configuration>
-       </plugin>
-             
-            <plugin>
- 
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version> 2.20.1</version>
- 
-                <configuration>
- 
-                    <suiteXmlFiles>
-                      <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
- 
-                </configuration>
-             </plugin>
-        </plugins>
-    </build>
+      <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+              <fork>true</fork>
+              <!-- Add all the checkers you want to enable here -->
+              <annotationProcessors>
+                  <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
+              </annotationProcessors>
+              <compilerArgs>
+                  <!-- location of the annotated JDK, which comes from a Maven dependency -->
+                  <arg>-Xbootclasspath/p:${annotatedJdk}</arg>
+              </compilerArgs>
+          </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
