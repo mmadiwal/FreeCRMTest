@@ -35,7 +35,7 @@ public class DemoTest {
     public void loginPageTitleTest() { 
 		 
 			 System.setProperty("webdriver.chrome.silentOutput", "true");
-				System.setProperty("webdriver.chrome.driver", "Xray/drivers/chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 				driver = new ChromeDriver();
 				driver.manage().window().maximize();
 				//driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
