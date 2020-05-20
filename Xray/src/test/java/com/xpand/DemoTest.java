@@ -35,7 +35,7 @@ public class DemoTest {
     @Test
     public void loginPageTitleTest() { 
 		 
-			 System.setProperty("webdriver.chrome.silentOutput", "true");
+			// System.setProperty("webdriver.chrome.silentOutput", "true");
 				//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 	                        WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
