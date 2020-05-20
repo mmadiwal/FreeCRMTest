@@ -39,9 +39,10 @@ public class HomePage {
 	
 	public WebDriver initialization() {
 		//System.out.println(prop.getProperty("username"));
-		 System.setProperty("webdriver.chrome.silentOutput", "true");
+		// System.setProperty("webdriver.chrome.silentOutput", "true");
 		  //set the path of the driver executable file 
-		  System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe"); 
+		 // System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe"); 
+		 WebDriverManager.chromedriver().setup();
 		  // open the browser 
 		  driver = new ChromeDriver();
 		  //Maximize the browser
