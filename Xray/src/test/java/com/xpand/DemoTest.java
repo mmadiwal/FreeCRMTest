@@ -35,7 +35,7 @@ public class DemoTest {
     @Test
     public void loginPageTitleTest() { 
 		 
-			// System.setProperty("webdriver.chrome.silentOutput", "true");
+			        // System.setProperty("webdriver.chrome.silentOutput", "true");
 				//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 	                        WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
@@ -48,7 +48,7 @@ public class DemoTest {
 				wait.until(ExpectedConditions.titleContains(title));
 				System.out.println(driver.getCurrentUrl()) ;
 				System.out.println(" Jenkins Configuration with selenium has been successfully completed");
-		  driver.quit();
+		                driver.quit();
 		  }    
 	
 }
